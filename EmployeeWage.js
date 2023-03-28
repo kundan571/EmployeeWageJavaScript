@@ -14,8 +14,12 @@ function getWorkingHours(employeeCheck) {
             return 0;
     }   
 }
+
+const NUM_OF_WORKING_DAY = 20;
 let employeeHrs = 0;
-let employeeCheck = Math.floor(Math.random() * 10) % 3;
-employeeHrs = getWorkingHours(employeeCheck);
+for(let day = 0; day < NUM_OF_WORKING_DAY; day++){
+    let employeeCheck = Math.floor(Math.random() * 10) % 3;
+    employeeHrs += getWorkingHours(employeeCheck);
+}
 let employeeWage = employeeHrs * WAGE_PER_HOUR;
-console.log("Employee Wage: " + employeeWage);
+console.log("Total Hours: " + employeeHrs +" " + "Total Employee Wage: " + employeeWage);
