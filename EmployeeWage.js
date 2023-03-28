@@ -14,12 +14,15 @@ function getWorkingHours(employeeCheck) {
             return 0;
     }   
 }
-
+const MAX_HRS_IN_MONTH = 160;
 const NUM_OF_WORKING_DAY = 20;
-let employeeHrs = 0;
-for(let day = 0; day < NUM_OF_WORKING_DAY; day++){
-    let employeeCheck = Math.floor(Math.random() * 10) % 3;
-    employeeHrs += getWorkingHours(employeeCheck);
-}
-let employeeWage = employeeHrs * WAGE_PER_HOUR;
-console.log("Total Hours: " + employeeHrs +" " + "Total Employee Wage: " + employeeWage);
+let totalEmployeeHrs = 0;
+let totalWorkingDay = 0;
+while(totalEmployeeHrs <= MAX_HRS_IN_MONTH &&
+         totalWorkingDay < NUM_OF_WORKING_DAY){
+            totalWorkingDay++;
+            let employeeCheck = Math.floor(Math.random() * 10) % 3;
+            totalEmployeeHrs += getWorkingHours(employeeCheck);
+         }
+let employeeWage = totalEmployeeHrs * WAGE_PER_HOUR;
+console.log("Total Days: " + totalWorkingDay + " " + "Total Hours: " + totalEmployeeHrs +" " + "Total Employee Wage: " + employeeWage);
