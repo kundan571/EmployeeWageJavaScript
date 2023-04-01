@@ -23,6 +23,7 @@ let totalEmployeeHrs = 0;
 let totalWorkingDay = 0;
 let employeeDailyWageArr = new Array();
 let employeeDailyWageMap = new Map();
+let employeeDailyHrsMap = new Map();
 while(totalEmployeeHrs <= MAX_HRS_IN_MONTH &&
          totalWorkingDay < NUM_OF_WORKING_DAY){
             totalWorkingDay++;
@@ -31,6 +32,7 @@ while(totalEmployeeHrs <= MAX_HRS_IN_MONTH &&
             totalEmployeeHrs += employeeHrs;
             employeeDailyWageArr.push(calculateDailyWage(employeeHrs));
             employeeDailyWageMap.set(totalWorkingDay, calculateDailyWage(employeeHrs));
+            employeeDailyHrsMap.set(totalWorkingDay,employeeHrs);
          } 
 let employeeWage = calculateDailyWage(totalEmployeeHrs);
 console.log("UC6-Total Days: " + totalWorkingDay + " " + "Total Hours: " + totalEmployeeHrs +" " + "Employee Wage: " + employeeWage);
@@ -99,3 +101,26 @@ console.log("UC7G- Number of days Employee worked: " + employeeDailyWageArr.redu
 console.log(employeeDailyWageMap);
 console.log("UC8- Employee wage map totalHrs: " +
             Array.from(employeeDailyWageMap.values()).reduce(totalWages,0));
+
+// UC9- Arrow function
+const findTotal = (totalVal,dailyVal) => {
+    return totalVal + dailyVal;
+}
+let count = 0;
+let totalHours = Array.from(employeeDailyHrsMap.values())
+                    .reduce(findTotal,0);
+let totalSalary = employeeDailyWageArr.filter(dailyWage => dailyWage > 0)
+                    .reduce(findTotal,0);
+console.log("UC9- Employee Wage with Arrow: " + " Total Hours: " + totalHours + " Total Wages: " + totalSalary);
+
+let nonOfWorkingDays = new Array();
+let partWorkingDays = new Array();
+let fullWorkingDays = new Array();
+employeeDailyHrsMap.forEach((value, key, map) => {
+    if (value == 8) fullWorkingDays.push(key);
+    else if (value == 4) partWorkingDays.push(key);
+    else nonOfWorkingDays.push(key);
+});
+console.log("Full Working Days: " + fullWorkingDays);
+console.log("Part Working days: " + partWorkingDays);
+console.log("UC9- Non Working days: " + nonOfWorkingDays);
